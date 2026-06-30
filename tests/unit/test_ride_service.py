@@ -59,6 +59,6 @@ class TestFareEstimate:
         lng_per_km = 1.0 / (111.32 * math.cos(math.radians(0)))
         fare = compute_fare_estimate(0.0, 0.0, 0.0, dist_km * lng_per_km)
         # Allow ±2 cents for rounding
-        assert (
-            abs(fare - expected_cents) <= 2
-        ), f"dist={dist_km} km: expected ~{expected_cents}, got {fare}"
+        assert abs(fare - expected_cents) <= 2, (
+            f"dist={dist_km} km: expected ~{expected_cents}, got {fare}"
+        )

@@ -70,9 +70,9 @@ class TestDriverLocationUpdate:
         }
         del body[missing_field]
         r = client.post(f"/drivers/{driver_id}/location", json=body)
-        assert (
-            r.status_code == 422
-        ), f"Missing '{missing_field}': expected 422, got {r.status_code}: {r.text}"
+        assert r.status_code == 422, (
+            f"Missing '{missing_field}': expected 422, got {r.status_code}: {r.text}"
+        )
 
     def test_invalid_status_returns_422(self, client, driver_id, known_pickup):
         r = client.post(

@@ -157,9 +157,9 @@ class TestExactlyOnceMatching:
             results = [f.result() for f in concurrent.futures.as_completed(futures)]
 
         status_codes = sorted(r.status_code for r in results)
-        assert (
-            status_codes == [200, 409]
-        ), f"Expected [200, 409] for concurrent match, got {status_codes}: {[r.text for r in results]}"
+        assert status_codes == [200, 409], (
+            f"Expected [200, 409] for concurrent match, got {status_codes}: {[r.text for r in results]}"
+        )
 
     def test_driver_not_double_assigned(self, client, rider_id, known_pickup, known_dropoff):
         """Two concurrent trips trying to match → one driver assigned to only one trip."""
@@ -216,9 +216,9 @@ class TestExactlyOnceMatching:
 
         # One should get 200, the other 503 (no more drivers)
         codes = {r1.status_code, r2.status_code}
-        assert (
-            200 in codes
-        ), f"At least one match should succeed: {r1.status_code}:{r1.text}, {r2.status_code}:{r2.text}"
+        assert 200 in codes, (
+            f"At least one match should succeed: {r1.status_code}:{r1.text}, {r2.status_code}:{r2.text}"
+        )
 
         # The driver should NOT be assigned to both trips
         if r1.status_code == 200:
