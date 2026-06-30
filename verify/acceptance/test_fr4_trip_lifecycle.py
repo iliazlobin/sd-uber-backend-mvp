@@ -108,9 +108,9 @@ class TestPickup:
         )
 
         r = client.post(f"/rides/{trip['trip_id']}/pickup", json={"driver_id": driver_id})
-        assert (
-            r.status_code == 409
-        ), f"Expected 409 for PENDING trip pickup, got {r.status_code}: {r.text}"
+        assert r.status_code == 409, (
+            f"Expected 409 for PENDING trip pickup, got {r.status_code}: {r.text}"
+        )
 
     def test_wrong_driver_returns_403(
         self, client, rider_id, known_pickup, known_dropoff, driver_id
@@ -190,9 +190,9 @@ class TestComplete:
                     },
                 )
             )
-            assert (
-                data["fare"] == expected_cents
-            ), f"distance={dist} km: expected fare={expected_cents}, got {data['fare']}"
+            assert data["fare"] == expected_cents, (
+                f"distance={dist} km: expected fare={expected_cents}, got {data['fare']}"
+            )
 
     def test_complete_not_picked_up_returns_409(
         self, client, rider_id, known_pickup, known_dropoff, driver_id
@@ -209,9 +209,9 @@ class TestComplete:
                 "duration_minutes": 10,
             },
         )
-        assert (
-            r.status_code == 409
-        ), f"Expected 409 for completing MATCHED (not PICKED_UP) trip, got {r.status_code}: {r.text}"
+        assert r.status_code == 409, (
+            f"Expected 409 for completing MATCHED (not PICKED_UP) trip, got {r.status_code}: {r.text}"
+        )
 
     def test_complete_wrong_driver_returns_403(
         self, client, rider_id, known_pickup, known_dropoff, driver_id
@@ -240,9 +240,9 @@ class TestComplete:
         assert_json_200(client.post(f"/rides/{trip_id}/pickup", json={"driver_id": driver_id}))
 
         r = client.post(f"/rides/{trip_id}/complete", json={"driver_id": driver_id})
-        assert (
-            r.status_code == 422
-        ), f"Missing distance/duration: expected 422, got {r.status_code}: {r.text}"
+        assert r.status_code == 422, (
+            f"Missing distance/duration: expected 422, got {r.status_code}: {r.text}"
+        )
 
     def test_complete_nonexistent_trip_returns_404(self, client, driver_id):
         assert_404(
@@ -270,9 +270,9 @@ class TestComplete:
                 "duration_minutes": 10,
             },
         )
-        assert (
-            r.status_code == 422
-        ), f"Negative distance: expected 422, got {r.status_code}: {r.text}"
+        assert r.status_code == 422, (
+            f"Negative distance: expected 422, got {r.status_code}: {r.text}"
+        )
 
     def test_driver_released_after_completion(
         self, client, rider_id, known_pickup, known_dropoff, driver_id
