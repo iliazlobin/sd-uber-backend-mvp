@@ -65,9 +65,9 @@ def _cleanup_redis_between_classes(client):
 
 def assert_json_200(r, expected_status=200):
     """Assert status code and return parsed JSON."""
-    assert (
-        r.status_code == expected_status
-    ), f"Expected {expected_status}, got {r.status_code}: {r.text}"
+    assert r.status_code == expected_status, (
+        f"Expected {expected_status}, got {r.status_code}: {r.text}"
+    )
     return r.json()
 
 

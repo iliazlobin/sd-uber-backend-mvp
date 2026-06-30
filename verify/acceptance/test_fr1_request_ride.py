@@ -81,9 +81,9 @@ class TestRequestRideValidation:
         }
         del body[missing_field]
         r = client.post("/rides", json=body)
-        assert (
-            r.status_code == 422
-        ), f"Missing '{missing_field}': expected 422, got {r.status_code}: {r.text}"
+        assert r.status_code == 422, (
+            f"Missing '{missing_field}': expected 422, got {r.status_code}: {r.text}"
+        )
 
     @pytest.mark.parametrize(
         "field,value",
