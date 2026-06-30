@@ -1,0 +1,47 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Distribution / packaging
+*.egg-info/
+*.egg
+build/
+dist/
+*.whl
+
+# Environments
+.env
+.venv/
+env/
+venv/
+*.env.local
+
+# Testing
+.pytest_cache/
+htmlcov/
+.coverage
+.coverage.*
+
+# Redis dump files
+*.rdb
+dump.rdb
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
+.venv*/
+.ruff_cache/
+.mypy_cache/
+*.log
+verify/logs/
+verify/state/
+.finalize.lock/
+.noship
