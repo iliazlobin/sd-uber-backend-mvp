@@ -86,7 +86,7 @@ async def match_ride(
         driver_id_str = member
         driver_uuid = UUID(driver_id_str)
 
-        # Atomic CAS: UPDATE drivers SET status='BUSY' WHERE driver_id=X AND status='ONLINE' RETURNING *
+        # Atomic CAS: UPDATE drivers SET status='BUSY' WHERE
         cas_stmt = (
             update(Driver)
             .where(Driver.driver_id == driver_uuid, Driver.status == "ONLINE")

@@ -108,7 +108,7 @@ async def pickup_ride(
         raise HTTPException(
             status_code=403,
             detail="Driver does not match assigned driver for this trip",
-        )
+        ) from None
 
 
 @router.post("/{trip_id}/complete", response_model=TripCompleteResponse)
@@ -146,11 +146,11 @@ async def complete_ride(
                     "type": "value_error",
                 }
             ],
-        )
+        ) from None
     except RuntimeError:
         raise HTTPException(status_code=409, detail="Trip is not in PICKED_UP state") from None
     except PermissionError:
         raise HTTPException(
             status_code=403,
             detail="Driver does not match assigned driver for this trip",
-        )
+        ) from None

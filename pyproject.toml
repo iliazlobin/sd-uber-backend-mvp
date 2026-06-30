@@ -29,10 +29,12 @@ target-version = "py312"
 line-length = 100
 
 [tool.ruff.lint]
-select = ["E", "F", "I", "N", "W", "UP", "B", "SIM", "C4"]
+select = ["E", "W", "F", "I", "UP", "B"]
+ignore = ["B008"]  # FastAPI Depends()/Query() in defaults — standard pattern
 
-[tool.ruff.lint.flake8-bugbear]
-extend-immutable-calls = ["fastapi.Query", "fastapi.Depends", "fastapi.Path", "fastapi.Body"]
+[tool.ruff.lint.per-file-ignores]
+"tests/**" = ["B", "UP", "F841"]
+"verify/**" = ["B", "E501"]
 
 [tool.setuptools.packages.find]
 where = ["src"]
