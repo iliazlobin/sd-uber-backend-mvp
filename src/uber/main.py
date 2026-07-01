@@ -1,6 +1,6 @@
 """FastAPI application factory with lifespan and health check."""
 
-from collections.abc import Awaitable, Callable
+from collections.abc import Callable
 from contextlib import asynccontextmanager, suppress
 
 from fastapi import FastAPI
@@ -9,8 +9,8 @@ from .database import _get_engine, _request_session
 from .redis_client import _get_client, close_redis
 from .routers import drivers, health, riders, rides
 
-
 # -- ASGI middleware: commit DB session BEFORE response headers --
+
 
 class DBSessionMiddleware:
     """Commit the per-request DB session before the first response byte.
